@@ -1,0 +1,24 @@
+#!/usr/bin/env python
+from datetime import timedelta, date
+
+
+def daterange(start_date, end_date):
+    diff = (end_date - start_date).days
+    c = 0
+    while c < diff:
+        yield [
+            start_date + timedelta(c + _)
+            for _ in range(7)
+        ]
+        c += 7
+
+
+for d in daterange(date(2016, 4, 25),date(2017, 5, 1)):
+    s = d[0].strftime('%B')
+    e = d[-1].strftime('%B')
+    if s == e:
+        s = ''
+
+    ds = ",".join([str(_.strftime('%d')).lstrip('0') for _ in d])
+
+    print "{0},{1},{2}".format(s,e,ds)
